@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c70278d1d1441df85b57654e2302f3b" Name="Diagram1">
+        <EntityTypeShape EntityType="CarHorizontalModel.IstorijaVlasnika" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHorizontalModel.Korisnici" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHorizontalModel.KupljeniIzvjestaji" Width="1.5" PointX="6" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHorizontalModel.LogoviAktivnosti" Width="1.5" PointX="2.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHorizontalModel.ProfiliKorisnika" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHorizontalModel.ServisnaIstorija" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHorizontalModel.StatusPotrage" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHorizontalModel.Uloge" Width="1.5" PointX="1.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHorizontalModel.Vozila" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHorizontalModel.ZapisiKilometraze" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarHorizontalModel.ZapisiNesreca" Width="1.5" PointX="3" PointY="20.5" IsExpanded="true" />
+        <AssociationConnector Association="CarHorizontalModel.FK__IstorijaV__Vozil__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="CarHorizontalModel.FK__Korisnici__Uloga__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="CarHorizontalModel.FK__KupljeniI__Koris__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="CarHorizontalModel.FK__ProfiliKo__Koris__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="CarHorizontalModel.FK__KupljeniI__Vozil__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="CarHorizontalModel.FK__ServisnaI__Vozil__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="CarHorizontalModel.FK__StatusPot__Vozil__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="CarHorizontalModel.FK__ZapisiKil__Vozil__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="CarHorizontalModel.FK__ZapisiNes__Vozil__534D60F1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

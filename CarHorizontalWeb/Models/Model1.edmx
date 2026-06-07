@@ -1,0 +1,822 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CarHorizontalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="IstorijaVlasnika">
+          <Key>
+            <PropertyRef Name="VlasnikID" />
+          </Key>
+          <Property Name="VlasnikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoziloID" Type="int" />
+          <Property Name="TipVlasnika" Type="nvarchar" MaxLength="30" />
+          <Property Name="ZemljaRegistracije" Type="nvarchar" MaxLength="50" />
+          <Property Name="DatumOd" Type="datetime" />
+          <Property Name="DatumDo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Korisnici">
+          <Key>
+            <PropertyRef Name="KorisnikID" />
+          </Key>
+          <Property Name="KorisnikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Lozinka" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UlogaID" Type="int" />
+          <Property Name="DatumRegistracije" Type="datetime" />
+        </EntityType>
+        <EntityType Name="KupljeniIzvjestaji">
+          <Key>
+            <PropertyRef Name="IzvjestajID" />
+          </Key>
+          <Property Name="IzvjestajID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KorisnikID" Type="int" />
+          <Property Name="VoziloID" Type="int" />
+          <Property Name="DatumKupovine" Type="datetime" />
+          <Property Name="Cijena" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="StatusPlacanja" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="LogoviAktivnosti">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KorisnikID" Type="int" />
+          <Property Name="Akcija" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OpisAktivnosti" Type="nvarchar(max)" />
+          <Property Name="DatumVrijeme" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ProfiliKorisnika">
+          <Key>
+            <PropertyRef Name="ProfilID" />
+          </Key>
+          <Property Name="ProfilID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KorisnikID" Type="int" />
+          <Property Name="BrojTelefona" Type="nvarchar" MaxLength="20" />
+          <Property Name="Grad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Drzava" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ServisnaIstorija">
+          <Key>
+            <PropertyRef Name="ServisID" />
+          </Key>
+          <Property Name="ServisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoziloID" Type="int" />
+          <Property Name="OpisServisa" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CijenaServisa" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="DatumServisa" Type="datetime" Nullable="false" />
+          <Property Name="NazivServisa" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="StatusPotrage">
+          <Key>
+            <PropertyRef Name="PotragaID" />
+          </Key>
+          <Property Name="PotragaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoziloID" Type="int" />
+          <Property Name="IsUkraden" Type="bit" />
+          <Property Name="DrzavaPrijave" Type="nvarchar" MaxLength="50" />
+          <Property Name="DatumPrijave" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Uloge">
+          <Key>
+            <PropertyRef Name="UlogaID" />
+          </Key>
+          <Property Name="UlogaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivUloge" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vozila">
+          <Key>
+            <PropertyRef Name="VoziloID" />
+          </Key>
+          <Property Name="VoziloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VIN" Type="nvarchar" MaxLength="17" Nullable="false" />
+          <Property Name="Marka" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Godiste" Type="int" Nullable="false" />
+          <Property Name="Kubikaza" Type="int" />
+          <Property Name="SnagaKS" Type="int" />
+          <Property Name="Gorivo" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ZapisiKilometraze">
+          <Key>
+            <PropertyRef Name="ZapisID" />
+          </Key>
+          <Property Name="ZapisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoziloID" Type="int" />
+          <Property Name="Kilometraza" Type="int" Nullable="false" />
+          <Property Name="DatumZapisa" Type="datetime" Nullable="false" />
+          <Property Name="IzvorZapisa" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ZapisiNesreca">
+          <Key>
+            <PropertyRef Name="NesrecaID" />
+          </Key>
+          <Property Name="NesrecaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoziloID" Type="int" />
+          <Property Name="DatumNesrece" Type="datetime" Nullable="false" />
+          <Property Name="OpisOstecenja" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProcijenjenaStetaEVR" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <Association Name="FK__IstorijaV__Vozil__45F365D3">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="IstorijaVlasnika" Type="Self.IstorijaVlasnika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="IstorijaVlasnika">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Korisnici__Uloga__3B75D760">
+          <End Role="Uloge" Type="Self.Uloge" Multiplicity="0..1" />
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uloge">
+              <PropertyRef Name="UlogaID" />
+            </Principal>
+            <Dependent Role="Korisnici">
+              <PropertyRef Name="UlogaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KupljeniI__Koris__5629CD9C">
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="0..1" />
+          <End Role="KupljeniIzvjestaji" Type="Self.KupljeniIzvjestaji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnici">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="KupljeniIzvjestaji">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KupljeniI__Vozil__571DF1D5">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1" />
+          <End Role="KupljeniIzvjestaji" Type="Self.KupljeniIzvjestaji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="KupljeniIzvjestaji">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProfiliKo__Koris__403A8C7D">
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProfiliKorisnika" Type="Self.ProfiliKorisnika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnici">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="ProfiliKorisnika">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServisnaI__Vozil__5070F446">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ServisnaIstorija" Type="Self.ServisnaIstorija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="ServisnaIstorija">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StatusPot__Vozil__49C3F6B7">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StatusPotrage" Type="Self.StatusPotrage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="StatusPotrage">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ZapisiKil__Vozil__4D94879B">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ZapisiKilometraze" Type="Self.ZapisiKilometraze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="ZapisiKilometraze">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ZapisiNes__Vozil__534D60F1">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ZapisiNesreca" Type="Self.ZapisiNesreca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="ZapisiNesreca">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_ProvjeriStatusPotrage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="VoziloID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_UkupnaStetaNaVozilu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="decimal">
+          <Parameter Name="VoziloID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_BrzaPretragaVozila" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VIN" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_DetaljnaPretragaVozila" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Marka" Type="nvarchar" Mode="In" />
+          <Parameter Name="Model" Type="nvarchar" Mode="In" />
+          <Parameter Name="Gorivo" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CarHorizontalModelStoreContainer">
+          <EntitySet Name="IstorijaVlasnika" EntityType="Self.IstorijaVlasnika" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Korisnici" EntityType="Self.Korisnici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KupljeniIzvjestaji" EntityType="Self.KupljeniIzvjestaji" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogoviAktivnosti" EntityType="Self.LogoviAktivnosti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfiliKorisnika" EntityType="Self.ProfiliKorisnika" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServisnaIstorija" EntityType="Self.ServisnaIstorija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusPotrage" EntityType="Self.StatusPotrage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uloge" EntityType="Self.Uloge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vozila" EntityType="Self.Vozila" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZapisiKilometraze" EntityType="Self.ZapisiKilometraze" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZapisiNesreca" EntityType="Self.ZapisiNesreca" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__IstorijaV__Vozil__45F365D3" Association="Self.FK__IstorijaV__Vozil__45F365D3">
+            <End Role="Vozila" EntitySet="Vozila" />
+            <End Role="IstorijaVlasnika" EntitySet="IstorijaVlasnika" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Korisnici__Uloga__3B75D760" Association="Self.FK__Korisnici__Uloga__3B75D760">
+            <End Role="Uloge" EntitySet="Uloge" />
+            <End Role="Korisnici" EntitySet="Korisnici" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KupljeniI__Koris__5629CD9C" Association="Self.FK__KupljeniI__Koris__5629CD9C">
+            <End Role="Korisnici" EntitySet="Korisnici" />
+            <End Role="KupljeniIzvjestaji" EntitySet="KupljeniIzvjestaji" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KupljeniI__Vozil__571DF1D5" Association="Self.FK__KupljeniI__Vozil__571DF1D5">
+            <End Role="Vozila" EntitySet="Vozila" />
+            <End Role="KupljeniIzvjestaji" EntitySet="KupljeniIzvjestaji" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProfiliKo__Koris__403A8C7D" Association="Self.FK__ProfiliKo__Koris__403A8C7D">
+            <End Role="Korisnici" EntitySet="Korisnici" />
+            <End Role="ProfiliKorisnika" EntitySet="ProfiliKorisnika" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServisnaI__Vozil__5070F446" Association="Self.FK__ServisnaI__Vozil__5070F446">
+            <End Role="Vozila" EntitySet="Vozila" />
+            <End Role="ServisnaIstorija" EntitySet="ServisnaIstorija" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StatusPot__Vozil__49C3F6B7" Association="Self.FK__StatusPot__Vozil__49C3F6B7">
+            <End Role="Vozila" EntitySet="Vozila" />
+            <End Role="StatusPotrage" EntitySet="StatusPotrage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ZapisiKil__Vozil__4D94879B" Association="Self.FK__ZapisiKil__Vozil__4D94879B">
+            <End Role="Vozila" EntitySet="Vozila" />
+            <End Role="ZapisiKilometraze" EntitySet="ZapisiKilometraze" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ZapisiNes__Vozil__534D60F1" Association="Self.FK__ZapisiNes__Vozil__534D60F1">
+            <End Role="Vozila" EntitySet="Vozila" />
+            <End Role="ZapisiNesreca" EntitySet="ZapisiNesreca" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarHorizontalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="IstorijaVlasnika">
+          <Key>
+            <PropertyRef Name="VlasnikID" />
+          </Key>
+          <Property Name="VlasnikID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoziloID" Type="Int32" />
+          <Property Name="TipVlasnika" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ZemljaRegistracije" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DatumOd" Type="DateTime" Precision="3" />
+          <Property Name="DatumDo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Vozila" Relationship="Self.FK__IstorijaV__Vozil__45F365D3" FromRole="IstorijaVlasnika" ToRole="Vozila" />
+        </EntityType>
+        <EntityType Name="Korisnici">
+          <Key>
+            <PropertyRef Name="KorisnikID" />
+          </Key>
+          <Property Name="KorisnikID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lozinka" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UlogaID" Type="Int32" />
+          <Property Name="DatumRegistracije" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Uloge" Relationship="Self.FK__Korisnici__Uloga__3B75D760" FromRole="Korisnici" ToRole="Uloge" />
+          <NavigationProperty Name="KupljeniIzvjestajis" Relationship="Self.FK__KupljeniI__Koris__5629CD9C" FromRole="Korisnici" ToRole="KupljeniIzvjestaji" />
+          <NavigationProperty Name="ProfiliKorisnikas" Relationship="Self.FK__ProfiliKo__Koris__403A8C7D" FromRole="Korisnici" ToRole="ProfiliKorisnika" />
+        </EntityType>
+        <EntityType Name="KupljeniIzvjestaji">
+          <Key>
+            <PropertyRef Name="IzvjestajID" />
+          </Key>
+          <Property Name="IzvjestajID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KorisnikID" Type="Int32" />
+          <Property Name="VoziloID" Type="Int32" />
+          <Property Name="DatumKupovine" Type="DateTime" Precision="3" />
+          <Property Name="Cijena" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="StatusPlacanja" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Korisnici" Relationship="Self.FK__KupljeniI__Koris__5629CD9C" FromRole="KupljeniIzvjestaji" ToRole="Korisnici" />
+          <NavigationProperty Name="Vozila" Relationship="Self.FK__KupljeniI__Vozil__571DF1D5" FromRole="KupljeniIzvjestaji" ToRole="Vozila" />
+        </EntityType>
+        <EntityType Name="LogoviAktivnosti">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KorisnikID" Type="Int32" />
+          <Property Name="Akcija" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OpisAktivnosti" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatumVrijeme" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProfiliKorisnika">
+          <Key>
+            <PropertyRef Name="ProfilID" />
+          </Key>
+          <Property Name="ProfilID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KorisnikID" Type="Int32" />
+          <Property Name="BrojTelefona" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Grad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Drzava" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Korisnici" Relationship="Self.FK__ProfiliKo__Koris__403A8C7D" FromRole="ProfiliKorisnika" ToRole="Korisnici" />
+        </EntityType>
+        <EntityType Name="ServisnaIstorija">
+          <Key>
+            <PropertyRef Name="ServisID" />
+          </Key>
+          <Property Name="ServisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoziloID" Type="Int32" />
+          <Property Name="OpisServisa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CijenaServisa" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DatumServisa" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NazivServisa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vozila" Relationship="Self.FK__ServisnaI__Vozil__5070F446" FromRole="ServisnaIstorija" ToRole="Vozila" />
+        </EntityType>
+        <EntityType Name="StatusPotrage">
+          <Key>
+            <PropertyRef Name="PotragaID" />
+          </Key>
+          <Property Name="PotragaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoziloID" Type="Int32" />
+          <Property Name="IsUkraden" Type="Boolean" />
+          <Property Name="DrzavaPrijave" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DatumPrijave" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Vozila" Relationship="Self.FK__StatusPot__Vozil__49C3F6B7" FromRole="StatusPotrage" ToRole="Vozila" />
+        </EntityType>
+        <EntityType Name="Uloge">
+          <Key>
+            <PropertyRef Name="UlogaID" />
+          </Key>
+          <Property Name="UlogaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivUloge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Korisnicis" Relationship="Self.FK__Korisnici__Uloga__3B75D760" FromRole="Uloge" ToRole="Korisnici" />
+        </EntityType>
+        <EntityType Name="Vozila">
+          <Key>
+            <PropertyRef Name="VoziloID" />
+          </Key>
+          <Property Name="VoziloID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VIN" Type="String" MaxLength="17" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Marka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Godiste" Type="Int32" Nullable="false" />
+          <Property Name="Kubikaza" Type="Int32" />
+          <Property Name="SnagaKS" Type="Int32" />
+          <Property Name="Gorivo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="IstorijaVlasnikas" Relationship="Self.FK__IstorijaV__Vozil__45F365D3" FromRole="Vozila" ToRole="IstorijaVlasnika" />
+          <NavigationProperty Name="KupljeniIzvjestajis" Relationship="Self.FK__KupljeniI__Vozil__571DF1D5" FromRole="Vozila" ToRole="KupljeniIzvjestaji" />
+          <NavigationProperty Name="ServisnaIstorijas" Relationship="Self.FK__ServisnaI__Vozil__5070F446" FromRole="Vozila" ToRole="ServisnaIstorija" />
+          <NavigationProperty Name="StatusPotrages" Relationship="Self.FK__StatusPot__Vozil__49C3F6B7" FromRole="Vozila" ToRole="StatusPotrage" />
+          <NavigationProperty Name="ZapisiKilometrazes" Relationship="Self.FK__ZapisiKil__Vozil__4D94879B" FromRole="Vozila" ToRole="ZapisiKilometraze" />
+          <NavigationProperty Name="ZapisiNesrecas" Relationship="Self.FK__ZapisiNes__Vozil__534D60F1" FromRole="Vozila" ToRole="ZapisiNesreca" />
+        </EntityType>
+        <EntityType Name="ZapisiKilometraze">
+          <Key>
+            <PropertyRef Name="ZapisID" />
+          </Key>
+          <Property Name="ZapisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoziloID" Type="Int32" />
+          <Property Name="Kilometraza" Type="Int32" Nullable="false" />
+          <Property Name="DatumZapisa" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IzvorZapisa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vozila" Relationship="Self.FK__ZapisiKil__Vozil__4D94879B" FromRole="ZapisiKilometraze" ToRole="Vozila" />
+        </EntityType>
+        <EntityType Name="ZapisiNesreca">
+          <Key>
+            <PropertyRef Name="NesrecaID" />
+          </Key>
+          <Property Name="NesrecaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoziloID" Type="Int32" />
+          <Property Name="DatumNesrece" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OpisOstecenja" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProcijenjenaStetaEVR" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Vozila" Relationship="Self.FK__ZapisiNes__Vozil__534D60F1" FromRole="ZapisiNesreca" ToRole="Vozila" />
+        </EntityType>
+        <Association Name="FK__IstorijaV__Vozil__45F365D3">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="IstorijaVlasnika" Type="Self.IstorijaVlasnika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="IstorijaVlasnika">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Korisnici__Uloga__3B75D760">
+          <End Role="Uloge" Type="Self.Uloge" Multiplicity="0..1" />
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uloge">
+              <PropertyRef Name="UlogaID" />
+            </Principal>
+            <Dependent Role="Korisnici">
+              <PropertyRef Name="UlogaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KupljeniI__Koris__5629CD9C">
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="0..1" />
+          <End Role="KupljeniIzvjestaji" Type="Self.KupljeniIzvjestaji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnici">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="KupljeniIzvjestaji">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProfiliKo__Koris__403A8C7D">
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProfiliKorisnika" Type="Self.ProfiliKorisnika" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnici">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="ProfiliKorisnika">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__KupljeniI__Vozil__571DF1D5">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1" />
+          <End Role="KupljeniIzvjestaji" Type="Self.KupljeniIzvjestaji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="KupljeniIzvjestaji">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServisnaI__Vozil__5070F446">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ServisnaIstorija" Type="Self.ServisnaIstorija" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="ServisnaIstorija">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StatusPot__Vozil__49C3F6B7">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StatusPotrage" Type="Self.StatusPotrage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="StatusPotrage">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ZapisiKil__Vozil__4D94879B">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ZapisiKilometraze" Type="Self.ZapisiKilometraze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="ZapisiKilometraze">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ZapisiNes__Vozil__534D60F1">
+          <End Role="Vozila" Type="Self.Vozila" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ZapisiNesreca" Type="Self.ZapisiNesreca" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vozila">
+              <PropertyRef Name="VoziloID" />
+            </Principal>
+            <Dependent Role="ZapisiNesreca">
+              <PropertyRef Name="VoziloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarHorizontalBaza" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="IstorijaVlasnikas" EntityType="Self.IstorijaVlasnika" />
+          <EntitySet Name="Korisnicis" EntityType="Self.Korisnici" />
+          <EntitySet Name="KupljeniIzvjestajis" EntityType="Self.KupljeniIzvjestaji" />
+          <EntitySet Name="LogoviAktivnostis" EntityType="Self.LogoviAktivnosti" />
+          <EntitySet Name="ProfiliKorisnikas" EntityType="Self.ProfiliKorisnika" />
+          <EntitySet Name="ServisnaIstorijas" EntityType="Self.ServisnaIstorija" />
+          <EntitySet Name="StatusPotrages" EntityType="Self.StatusPotrage" />
+          <EntitySet Name="Uloges" EntityType="Self.Uloge" />
+          <EntitySet Name="Vozilas" EntityType="Self.Vozila" />
+          <EntitySet Name="ZapisiKilometrazes" EntityType="Self.ZapisiKilometraze" />
+          <EntitySet Name="ZapisiNesrecas" EntityType="Self.ZapisiNesreca" />
+          <AssociationSet Name="FK__IstorijaV__Vozil__45F365D3" Association="Self.FK__IstorijaV__Vozil__45F365D3">
+            <End Role="Vozila" EntitySet="Vozilas" />
+            <End Role="IstorijaVlasnika" EntitySet="IstorijaVlasnikas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Korisnici__Uloga__3B75D760" Association="Self.FK__Korisnici__Uloga__3B75D760">
+            <End Role="Uloge" EntitySet="Uloges" />
+            <End Role="Korisnici" EntitySet="Korisnicis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KupljeniI__Koris__5629CD9C" Association="Self.FK__KupljeniI__Koris__5629CD9C">
+            <End Role="Korisnici" EntitySet="Korisnicis" />
+            <End Role="KupljeniIzvjestaji" EntitySet="KupljeniIzvjestajis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProfiliKo__Koris__403A8C7D" Association="Self.FK__ProfiliKo__Koris__403A8C7D">
+            <End Role="Korisnici" EntitySet="Korisnicis" />
+            <End Role="ProfiliKorisnika" EntitySet="ProfiliKorisnikas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__KupljeniI__Vozil__571DF1D5" Association="Self.FK__KupljeniI__Vozil__571DF1D5">
+            <End Role="Vozila" EntitySet="Vozilas" />
+            <End Role="KupljeniIzvjestaji" EntitySet="KupljeniIzvjestajis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServisnaI__Vozil__5070F446" Association="Self.FK__ServisnaI__Vozil__5070F446">
+            <End Role="Vozila" EntitySet="Vozilas" />
+            <End Role="ServisnaIstorija" EntitySet="ServisnaIstorijas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StatusPot__Vozil__49C3F6B7" Association="Self.FK__StatusPot__Vozil__49C3F6B7">
+            <End Role="Vozila" EntitySet="Vozilas" />
+            <End Role="StatusPotrage" EntitySet="StatusPotrages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ZapisiKil__Vozil__4D94879B" Association="Self.FK__ZapisiKil__Vozil__4D94879B">
+            <End Role="Vozila" EntitySet="Vozilas" />
+            <End Role="ZapisiKilometraze" EntitySet="ZapisiKilometrazes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ZapisiNes__Vozil__534D60F1" Association="Self.FK__ZapisiNes__Vozil__534D60F1">
+            <End Role="Vozila" EntitySet="Vozilas" />
+            <End Role="ZapisiNesreca" EntitySet="ZapisiNesrecas" />
+          </AssociationSet>
+          <FunctionImport Name="Sp_BrzaPretragaVozila" ReturnType="Collection(CarHorizontalModel.Sp_BrzaPretragaVozila_Result)">
+            <Parameter Name="VIN" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_DetaljnaPretragaVozila" ReturnType="Collection(CarHorizontalModel.Sp_DetaljnaPretragaVozila_Result)">
+            <Parameter Name="Marka" Mode="In" Type="String" />
+            <Parameter Name="Model" Mode="In" Type="String" />
+            <Parameter Name="Gorivo" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Sp_BrzaPretragaVozila_Result">
+          <Property Type="Int32" Name="VoziloID" Nullable="false" />
+          <Property Type="String" Name="Marka" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Model" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Godiste" Nullable="false" />
+          <Property Type="String" Name="Gorivo" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="BrojZapisaKilometraze" Nullable="true" />
+          <Property Type="Int32" Name="BrojServisa" Nullable="true" />
+          <Property Type="Int32" Name="BrojNesreca" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_DetaljnaPretragaVozila_Result">
+          <Property Type="Int32" Name="VoziloID" Nullable="false" />
+          <Property Type="String" Name="VIN" Nullable="false" MaxLength="17" />
+          <Property Type="String" Name="Marka" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Model" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Godiste" Nullable="false" />
+          <Property Type="String" Name="Gorivo" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="SnagaKS" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarHorizontalModelStoreContainer" CdmEntityContainer="CarHorizontalBaza">
+          <EntitySetMapping Name="IstorijaVlasnikas">
+            <EntityTypeMapping TypeName="CarHorizontalModel.IstorijaVlasnika">
+              <MappingFragment StoreEntitySet="IstorijaVlasnika">
+                <ScalarProperty Name="VlasnikID" ColumnName="VlasnikID" />
+                <ScalarProperty Name="VoziloID" ColumnName="VoziloID" />
+                <ScalarProperty Name="TipVlasnika" ColumnName="TipVlasnika" />
+                <ScalarProperty Name="ZemljaRegistracije" ColumnName="ZemljaRegistracije" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Korisnicis">
+            <EntityTypeMapping TypeName="CarHorizontalModel.Korisnici">
+              <MappingFragment StoreEntitySet="Korisnici">
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+                <ScalarProperty Name="UlogaID" ColumnName="UlogaID" />
+                <ScalarProperty Name="DatumRegistracije" ColumnName="DatumRegistracije" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KupljeniIzvjestajis">
+            <EntityTypeMapping TypeName="CarHorizontalModel.KupljeniIzvjestaji">
+              <MappingFragment StoreEntitySet="KupljeniIzvjestaji">
+                <ScalarProperty Name="IzvjestajID" ColumnName="IzvjestajID" />
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="VoziloID" ColumnName="VoziloID" />
+                <ScalarProperty Name="DatumKupovine" ColumnName="DatumKupovine" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+                <ScalarProperty Name="StatusPlacanja" ColumnName="StatusPlacanja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogoviAktivnostis">
+            <EntityTypeMapping TypeName="CarHorizontalModel.LogoviAktivnosti">
+              <MappingFragment StoreEntitySet="LogoviAktivnosti">
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="Akcija" ColumnName="Akcija" />
+                <ScalarProperty Name="OpisAktivnosti" ColumnName="OpisAktivnosti" />
+                <ScalarProperty Name="DatumVrijeme" ColumnName="DatumVrijeme" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfiliKorisnikas">
+            <EntityTypeMapping TypeName="CarHorizontalModel.ProfiliKorisnika">
+              <MappingFragment StoreEntitySet="ProfiliKorisnika">
+                <ScalarProperty Name="ProfilID" ColumnName="ProfilID" />
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="BrojTelefona" ColumnName="BrojTelefona" />
+                <ScalarProperty Name="Grad" ColumnName="Grad" />
+                <ScalarProperty Name="Drzava" ColumnName="Drzava" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServisnaIstorijas">
+            <EntityTypeMapping TypeName="CarHorizontalModel.ServisnaIstorija">
+              <MappingFragment StoreEntitySet="ServisnaIstorija">
+                <ScalarProperty Name="ServisID" ColumnName="ServisID" />
+                <ScalarProperty Name="VoziloID" ColumnName="VoziloID" />
+                <ScalarProperty Name="OpisServisa" ColumnName="OpisServisa" />
+                <ScalarProperty Name="CijenaServisa" ColumnName="CijenaServisa" />
+                <ScalarProperty Name="DatumServisa" ColumnName="DatumServisa" />
+                <ScalarProperty Name="NazivServisa" ColumnName="NazivServisa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusPotrages">
+            <EntityTypeMapping TypeName="CarHorizontalModel.StatusPotrage">
+              <MappingFragment StoreEntitySet="StatusPotrage">
+                <ScalarProperty Name="PotragaID" ColumnName="PotragaID" />
+                <ScalarProperty Name="VoziloID" ColumnName="VoziloID" />
+                <ScalarProperty Name="IsUkraden" ColumnName="IsUkraden" />
+                <ScalarProperty Name="DrzavaPrijave" ColumnName="DrzavaPrijave" />
+                <ScalarProperty Name="DatumPrijave" ColumnName="DatumPrijave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uloges">
+            <EntityTypeMapping TypeName="CarHorizontalModel.Uloge">
+              <MappingFragment StoreEntitySet="Uloge">
+                <ScalarProperty Name="UlogaID" ColumnName="UlogaID" />
+                <ScalarProperty Name="NazivUloge" ColumnName="NazivUloge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vozilas">
+            <EntityTypeMapping TypeName="CarHorizontalModel.Vozila">
+              <MappingFragment StoreEntitySet="Vozila">
+                <ScalarProperty Name="VoziloID" ColumnName="VoziloID" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Godiste" ColumnName="Godiste" />
+                <ScalarProperty Name="Kubikaza" ColumnName="Kubikaza" />
+                <ScalarProperty Name="SnagaKS" ColumnName="SnagaKS" />
+                <ScalarProperty Name="Gorivo" ColumnName="Gorivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZapisiKilometrazes">
+            <EntityTypeMapping TypeName="CarHorizontalModel.ZapisiKilometraze">
+              <MappingFragment StoreEntitySet="ZapisiKilometraze">
+                <ScalarProperty Name="ZapisID" ColumnName="ZapisID" />
+                <ScalarProperty Name="VoziloID" ColumnName="VoziloID" />
+                <ScalarProperty Name="Kilometraza" ColumnName="Kilometraza" />
+                <ScalarProperty Name="DatumZapisa" ColumnName="DatumZapisa" />
+                <ScalarProperty Name="IzvorZapisa" ColumnName="IzvorZapisa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZapisiNesrecas">
+            <EntityTypeMapping TypeName="CarHorizontalModel.ZapisiNesreca">
+              <MappingFragment StoreEntitySet="ZapisiNesreca">
+                <ScalarProperty Name="NesrecaID" ColumnName="NesrecaID" />
+                <ScalarProperty Name="VoziloID" ColumnName="VoziloID" />
+                <ScalarProperty Name="DatumNesrece" ColumnName="DatumNesrece" />
+                <ScalarProperty Name="OpisOstecenja" ColumnName="OpisOstecenja" />
+                <ScalarProperty Name="ProcijenjenaStetaEVR" ColumnName="ProcijenjenaStetaEVR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Sp_BrzaPretragaVozila" FunctionName="CarHorizontalModel.Store.Sp_BrzaPretragaVozila">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CarHorizontalModel.Sp_BrzaPretragaVozila_Result">
+                <ScalarProperty Name="VoziloID" ColumnName="VoziloID" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Godiste" ColumnName="Godiste" />
+                <ScalarProperty Name="Gorivo" ColumnName="Gorivo" />
+                <ScalarProperty Name="BrojZapisaKilometraze" ColumnName="BrojZapisaKilometraze" />
+                <ScalarProperty Name="BrojServisa" ColumnName="BrojServisa" />
+                <ScalarProperty Name="BrojNesreca" ColumnName="BrojNesreca" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_DetaljnaPretragaVozila" FunctionName="CarHorizontalModel.Store.Sp_DetaljnaPretragaVozila">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CarHorizontalModel.Sp_DetaljnaPretragaVozila_Result">
+                <ScalarProperty Name="VoziloID" ColumnName="VoziloID" />
+                <ScalarProperty Name="VIN" ColumnName="VIN" />
+                <ScalarProperty Name="Marka" ColumnName="Marka" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Godiste" ColumnName="Godiste" />
+                <ScalarProperty Name="Gorivo" ColumnName="Gorivo" />
+                <ScalarProperty Name="SnagaKS" ColumnName="SnagaKS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
